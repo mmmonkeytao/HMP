@@ -61,7 +61,7 @@ void onlineclust::HMP::computeHMP(const char* dir, Eigen::VectorXd &feaHMP)
     if(resizetag){
       
       uint max = std::max(rows, cols);
-      uint min = std::min(rows, cols);
+
       double scale;
       if( max > maxsize){
 	scale = (double)maxsize / (double)max;
@@ -69,6 +69,8 @@ void onlineclust::HMP::computeHMP(const char* dir, Eigen::VectorXd &feaHMP)
 	resize(img3C, img3C, cv::Size(), scale, scale, INTER_CUBIC);
       }
 
+      uint min = std::min(img1C.rows, img1C.cols);
+      
       if( min < minsize){
 	scale = (double)minsize / (double)min;
 	resize(img1C, img1C, cv::Size(), scale, scale, INTER_CUBIC);
@@ -214,8 +216,9 @@ void onlineclust::HMP::computeHMP(const char* dir, Eigen::VectorXd &feaHMP)
 
     // resize Image
     if(resizetag){      
+
       uint max = std::max(img1C.rows, img1C.cols);
-      uint min = std::min(img1C.rows, img1C.cols);
+
       double scale;
 
       if( max > maxsize){
@@ -223,6 +226,8 @@ void onlineclust::HMP::computeHMP(const char* dir, Eigen::VectorXd &feaHMP)
 	resize(img1C, img1C, cv::Size(), scale, scale, INTER_CUBIC);
 	resize(img3C, img3C, cv::Size(), scale, scale, INTER_CUBIC);
       }
+
+      uint min = std::min(img1C.rows, img1C.cols);
 
       if( min < minsize){
 	scale = (double)minsize / (double)min;
